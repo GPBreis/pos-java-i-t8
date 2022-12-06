@@ -4,6 +4,7 @@ import java.util.List;
 public final class BDVeiculos {
 
     private Passeio passeio;
+    private Carga carga;
 
     private List<Passeio> listaPasseio = new ArrayList<>();
     private List<Carga> listaCarga = new ArrayList<>();
@@ -46,6 +47,56 @@ public final class BDVeiculos {
         }
         return null;
     }
+
+    public Passeio excPasseio(Passeio passeio) {
+        try {
+            Passeio pass1 = consPlacaPasseio(passeio);
+            if(pass1 != null){
+                listaPasseio.remove(pass1);
+                return null;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return passeio;
+    }
+
+
+    public Carga consPlacaCarga(Carga carga) throws VeicExistException{
+        for(int i = 0; i < listaCarga.size(); i++){
+            if(carga.getPlaca().equals(listaCarga.get(i).getPlaca())){
+                return listaCarga.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Carga cadCarga(Carga carga) {
+        try{
+            if(consPlacaCarga(carga) == null){
+                listaCarga.add(carga);
+                return carga;
+            } else {
+                return null;
+            }
+        } catch (VeicExistException e){
+            return null;
+        }
+    }
+
+    public Carga excCarga(Carga carga) {
+        try {
+            Carga carg1 = consPlacaCarga(carga);
+            if(carg1 != null){
+                listaCarga.remove(carg1);
+                return null;
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return carga;
+    }
+
 
     public boolean existePasseio(String placa) throws VeicExistException {
         for(int i = 0; i < getListaPasseio().size(); i++){

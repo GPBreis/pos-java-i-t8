@@ -160,7 +160,7 @@ public class JanConExcPass extends JFrame implements ActionListener{
             consPlaca();
         }
         if (evt.getSource() == btExcluir){
-            //limpar();
+            excPlaca();
         }
         if (evt.getSource() == btSair){
            sair();
@@ -185,16 +185,30 @@ public class JanConExcPass extends JFrame implements ActionListener{
                 tfQtdPassageirosConExcPasseio.setText(Integer.toString(pass.getQtdPassageiros()));
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Veículo de passeio não encontrado", "Veículo não encontrato", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Veículo de passeio não encontrado", "ERRO AO CONSULTAR", JOptionPane.ERROR_MESSAGE);
             }
         } catch (VeicExistException e) {
 
         }
-
-        
-
     }
     
+    public void excPlaca(){
+        pass = new Passeio();
+
+        try {
+            pass.setPlaca(tfPlacaPasseio.getText());
+            pass = BDVeiculos.getBdVeiculos().excPasseio(pass);
+            if(pass == null){
+                JOptionPane.showMessageDialog(null, "Veículo de passeio excluído", "Veículo Excluído", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Veículo de passeio não encontrado", "ERRO AO EXCLUIR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
+
     public void sair() {
         janPrincipalConExcPasseio.dispose();
     }

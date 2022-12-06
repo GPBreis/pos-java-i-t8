@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 public class JanCargaGeral implements ActionListener{
     
     private static JanCargaGeral janCargaUnica;
-    static JFrame janPrincipalPasseio = new JFrame();
-    static JLabel lbCabecalhoPasseio = new JLabel();
+    static JFrame janPrincipalCarga = new JFrame();
+    static JLabel lbCabecalhoCarga = new JLabel();
     static JButton btCadastrar = new JButton();
     static JButton btConsultarExcluirPlaca = new JButton();
     static JButton btConsultarExcluirTodos = new JButton();
-    static JanCargaGeral janPasseio = new JanCargaGeral();
+    static JanCargaGeral janCarga = new JanCargaGeral();
 
     public static JanCargaGeral getJanCargaGeral(){
         if (janCargaUnica == null) {
@@ -24,49 +24,58 @@ public class JanCargaGeral implements ActionListener{
     }
 
     private JanCargaGeral() {
-        criaJanCarga();
+        //criaJanCarga();
     }
 
     public static void criaJanCarga() {
-        janPrincipalPasseio.setDefaultCloseOperation(janPrincipalPasseio.DISPOSE_ON_CLOSE);
-        janPrincipalPasseio.setSize(400, 250);
-        janPrincipalPasseio.setLocationRelativeTo(null);
-        janPrincipalPasseio.setResizable(false);
-        janPrincipalPasseio.setLayout(null);
-        janPrincipalPasseio.setTitle("Cadastro de veículos carga");
+        janPrincipalCarga.setDefaultCloseOperation(janPrincipalCarga.DISPOSE_ON_CLOSE);
+        janPrincipalCarga.setSize(400, 250);
+        janPrincipalCarga.setLocationRelativeTo(null);
+        janPrincipalCarga.setResizable(false);
+        janPrincipalCarga.setLayout(null);
+        janPrincipalCarga.setTitle("Cadastro de veículos carga");
         
-        lbCabecalhoPasseio.setText("Manipular veículos de carga");
-        lbCabecalhoPasseio.setFont(new Font(null, Font.PLAIN, 25));
-        lbCabecalhoPasseio.setBounds(0, 0, 400, 35);;
+        lbCabecalhoCarga.setText("Manipular veículos de carga");
+        lbCabecalhoCarga.setFont(new Font(null, Font.PLAIN, 25));
+        lbCabecalhoCarga.setBounds(0, 0, 400, 35);;
 
         btCadastrar.setText("Cadastrar");
         btCadastrar.setBounds(100, 85, 200, 30);
         btCadastrar.setFocusable(false);
-        btCadastrar.addActionListener(janPasseio);
+        btCadastrar.addActionListener(janCarga);
 
         btConsultarExcluirPlaca.setText("Consultar / Excluir pela placa");
         btConsultarExcluirPlaca.setBounds(100, 125, 200, 30);
         btConsultarExcluirPlaca.setFocusable(false);
-        btConsultarExcluirPlaca.addActionListener(janPasseio);
+        btConsultarExcluirPlaca.addActionListener(janCarga);
 
         btConsultarExcluirTodos.setText("Consultar / Excluir todos");
         btConsultarExcluirTodos.setBounds(100, 165, 200, 30);
         btConsultarExcluirTodos.setFocusable(false);
-        btConsultarExcluirTodos.addActionListener(janPasseio);
+        btConsultarExcluirTodos.addActionListener(janCarga);
 
 
-        janPrincipalPasseio.add(lbCabecalhoPasseio);
-        janPrincipalPasseio.add(btCadastrar);
-        janPrincipalPasseio.add(btConsultarExcluirPlaca);
-        janPrincipalPasseio.add(btConsultarExcluirTodos);
+        janPrincipalCarga.add(lbCabecalhoCarga);
+        janPrincipalCarga.add(btCadastrar);
+        janPrincipalCarga.add(btConsultarExcluirPlaca);
+        janPrincipalCarga.add(btConsultarExcluirTodos);
 
-        janPrincipalPasseio.setVisible(true);
+        janPrincipalCarga.setVisible(true);
     }
 
-    
-
-
     public void actionPerformed(ActionEvent evt) {
+        if (evt.getSource().equals(btCadastrar)){
+            abreJanCadCarga();
+        } else if (evt.getSource().equals(btConsultarExcluirPlaca)){
+            abreJanConExcCarga();
+        }
+    }
 
+    public void abreJanCadCarga(){
+        JanCadCarga.getJanCadCarga().criaJanCadCarga();
+    }
+
+    public void abreJanConExcCarga(){
+        JanConExcCarga.getJanConExcCarga().criaJanConExcCarga();
     }
 }

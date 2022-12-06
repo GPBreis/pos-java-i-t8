@@ -57,7 +57,7 @@ public class JanPrincipal implements ActionListener{
     }
 
     public void abreJanPasseioGeral(){
-        JanPasseioGeral.getJanPasseioGeral().criaJanPasseio();
+        JanPasseioGeral.getJanPasseioGeral().criaJanPasseio();;
     }
 
     public void abreJanCargaGeral(){

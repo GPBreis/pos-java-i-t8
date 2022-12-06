@@ -9,7 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JanCadPass implements ActionListener{
+public class JanCadPass extends JFrame implements ActionListener{
     private static JanCadPass janCadPasseioUnica;
 
     private Passeio pass = new Passeio();
@@ -144,14 +144,13 @@ public class JanCadPass implements ActionListener{
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource().equals(btCadastrar)){
             cadPasseio();
-            limpar();
+            //limpar();
         } else if (evt.getSource().equals(btLimpar)){
             limpar();
         }else if (evt.getSource().equals(btSair)){
             sair();
         }
     }
-
 
     public void cadPasseio(){
         pass = new Passeio();
