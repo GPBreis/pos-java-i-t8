@@ -16,9 +16,9 @@ public class JanPasseioGeral extends JFrame implements ActionListener{
     static JButton btConsultarExcluirTodos = new JButton();
     static JanPasseioGeral janPasseio = new JanPasseioGeral();
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         
-    }
+    //}
     
     public static JanPasseioGeral getJanPasseioGeral(){
         if (janPasseioUnica == null) {
@@ -28,7 +28,7 @@ public class JanPasseioGeral extends JFrame implements ActionListener{
     }
 
     private JanPasseioGeral() {
-        criaJanPasseio();
+        //criaJanPasseio();
     }
 
     public static void criaJanPasseio() {
@@ -69,13 +69,17 @@ public class JanPasseioGeral extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource().equals(btCadastrar)){
-            abreJanPasseioGeral();
+            abreJanCadPasseio();
         } else if (evt.getSource().equals(btConsultarExcluirPlaca)){
-            
+            abreJanConExcPasseio();
         }
     }
 
-    public void abreJanPasseioGeral(){
+    public void abreJanCadPasseio(){
         JanCadPass.getJanCadPass().criaJanCadPasseio();
+    }
+
+    public void abreJanConExcPasseio(){
+        JanConExcPass.getJanConExcPass().criaJanConExcPasseio();
     }
 }

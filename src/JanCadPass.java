@@ -1,6 +1,7 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.Font;
@@ -8,8 +9,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JanCadPass extends JFrame implements ActionListener{
+public class JanCadPass implements ActionListener{
     private static JanCadPass janCadPasseioUnica;
+
+    private Passeio pass = new Passeio();
+
     static JFrame janPrincipalCadPasseio = new JFrame();
 
     static JLabel lbCabecalhoCadPasseio = new JLabel();
@@ -39,9 +43,9 @@ public class JanCadPass extends JFrame implements ActionListener{
 
     static JanCadPass janPasseio = new JanCadPass();
 
-    public static void main(String[] args) {
+   // public static void main(String[] args) {
         
-    }
+   // }
 
     public static JanCadPass getJanCadPass(){
         if (janCadPasseioUnica == null) {
@@ -51,7 +55,7 @@ public class JanCadPass extends JFrame implements ActionListener{
     }
 
     private JanCadPass() {
-        criaJanCadPasseio();
+        //criaJanCadPasseio();
     }
 
     public static void criaJanCadPasseio() {
@@ -139,7 +143,8 @@ public class JanCadPass extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource().equals(btCadastrar)){
-            abreJanPasseioGeral();
+            cadPasseio();
+            limpar();
         } else if (evt.getSource().equals(btLimpar)){
             limpar();
         }else if (evt.getSource().equals(btSair)){
@@ -147,8 +152,34 @@ public class JanCadPass extends JFrame implements ActionListener{
         }
     }
 
-    public void abreJanPasseioGeral(){
-        JanPasseioGeral.getJanPasseioGeral().criaJanPasseio();
+
+    public void cadPasseio(){
+        pass = new Passeio();
+        try{
+            pass.setPlaca(tfPlacaCadPasseio.getText());
+            pass.setMarca(tfMarcaCadPasseio.getText());
+            pass.setModelo(tfModeloCadPasseio.getText());
+            pass.setCor(tfCorCadPasseio.getText());
+            try{
+                pass.setVelocMax(Float.parseFloat(tfVelMaxCadPasseio.getText()));
+            } catch (VelocException e) {
+                JOptionPane.showMessageDialog(null, e.getStackTrace(), "Velocidade incorreta", JOptionPane.INFORMATION_MESSAGE);
+            }
+            pass.setQtdRodas(Integer.parseInt(tfQtRodasCadPasseio.getText()));
+            pass.getMotor().setQtdPist(Integer.parseInt(tfQtPistaoCadPasseio.getText()));
+            pass.getMotor().setPotencia(Integer.parseInt(tfPotenciaCadPasseio.getText()));
+            pass.setQtdPassageiros(Integer.parseInt(tfQtdPassageirosCadPasseio.getText()));
+        } catch (VeicExistException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Veiculo duplicado", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        pass = BDVeiculos.getBdVeiculos().cadPasseio(pass);
+
+        if(pass != null) {
+            JOptionPane.showMessageDialog(null, "Veículo de passeio cadastrado com sucesso!", "Veículo cadastrado", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Veículo de passeio com placa duplicada", "Veículo duplicado", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public void limpar() {
